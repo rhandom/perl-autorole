@@ -1,0 +1,7 @@
+Changes
+lib/AutoRole.pm
+Makefile.PL
+MANIFEST			This list of files
+MANIFEST.SKIP
+README
+t/00_base.t
