@@ -2,7 +2,9 @@
 
 =head1 NAME
 
-00_base.t - Test functionality of autorole.
+03_autorole.t - Test functionality of autorole.
+
+$Id$
 
 =cut
 

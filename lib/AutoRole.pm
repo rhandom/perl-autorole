@@ -11,8 +11,6 @@ $Id$
 use strict;
 use warnings;
 
-$AutoRole::VERSION = '0.01';
-
 sub import { ## no critic (ProhibitExcessComplexity)
     my ($class, @args) = @_;
     my ($pkg, $file, $line) = caller;
