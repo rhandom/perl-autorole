@@ -113,6 +113,8 @@ __END__
 
 =head1 SYNOPSIS
 
+  use AutoRole Bam => [qw(bar baz bim)];
+
   use AutoRole
     class   => 'Bam',
     how     => 'autorequire',
