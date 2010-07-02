@@ -285,4 +285,8 @@ to '*'.
 
 Paul Seamons
 
+=head1 LICENSE
+
+This module may be distributed under the same terms as Perl itself.
+
 =cut
