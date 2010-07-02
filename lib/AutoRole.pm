@@ -11,7 +11,9 @@ $Id$
 use strict;
 use warnings;
 
-sub import { ## no critic (ProhibitExcessComplexity)
+$AutoRole::VERSION = '0.01';
+
+sub import {
     my ($class, @args) = @_;
     my ($pkg, $file, $line) = caller;
     my ($module, $how, %list);
@@ -45,7 +47,7 @@ sub import { ## no critic (ProhibitExcessComplexity)
         else { die "Missing list of methods to load at $file line $line\n" }
     }
     $how ||= 'autorequire';
-    no strict 'refs'; ## no critic (NoStrict ProhibitProlongedStrictureOverride)
+    no strict 'refs';
 
     my $star = delete $list{'*'};
     if ($star) {
@@ -61,7 +63,7 @@ sub import { ## no critic (ProhibitExcessComplexity)
     if ($how eq 'compile') {
         require $module_file;
     } elsif ($how eq 'autoload') {
-        no warnings; ## no critic (NoWarning)
+        no warnings;
         my $ref  = ${"${pkg}::AUTOROLE"} ||= {};
         my $code = \&{"${pkg}::AUTOLOAD"};
         *{"${pkg}::AUTOLOAD"} = sub {
@@ -95,7 +97,7 @@ sub import { ## no critic (ProhibitExcessComplexity)
             } else {
                 *{"${pkg}::$dest"} = sub {
                     require $module_file;
-                    no warnings; ## no critic (NoWarning)
+                    no warnings;
                     *{"${pkg}::$dest"} = $module->can($src) || die "No such method as ${module}::$src - $file line $line\n";
                     goto &{"${pkg}::$dest"}; # avoid inserting ourselves into the stack
                 };
