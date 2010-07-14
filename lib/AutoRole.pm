@@ -11,7 +11,7 @@ $Id$
 use strict;
 use warnings;
 
-$AutoRole::VERSION = '0.02';
+$AutoRole::VERSION = '0.03';
 
 sub import {
     my ($class, @args) = @_;
