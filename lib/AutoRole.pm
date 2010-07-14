@@ -11,7 +11,7 @@ $Id$
 use strict;
 use warnings;
 
-$AutoRole::VERSION = '0.01';
+$AutoRole::VERSION = '0.02';
 
 sub import {
     my ($class, @args) = @_;
@@ -29,13 +29,13 @@ sub import {
             if (ref $item eq 'Regexp') { $how = 'compile'; push @{ $list{'*'} }, $item; next }
             while (my ($k, $v) = each %$item) {
                 next if ! $v;
-                if ($k eq '*') { push @{ $list{'*'} }, ref($v) eq 'ARRAY' ? @$v : ref($v) ? $v : qr{(?=)}x; next }
+                if ($k eq '*') { push @{ $list{'*'} }, ref($v) eq 'ARRAY' ? @$v : ref($v) ? $v : qr{.}x; next }
                 $list{$k} = (ref($v) || $v =~ /^[^\W\d]\w+$/x) ? $v : $k;
             }
             next;
         }
         if ($item =~ /^(?:compile|autoload|autorequire)$/x) { $how = $item }
-        elsif ($item eq '*') { push @{ $list{'*'} }, qr{(?=)}x }
+        elsif ($item eq '*') { push @{ $list{'*'} }, qr{.}x }
         elsif (! $module) { $module = $item }
         else { $list{$item} = $item }
     }
@@ -43,7 +43,7 @@ sub import {
     die "Missing class name at $file line $line\n" if ! $module;
     (my $module_file = "$module.pm") =~ s{::}{/}xg;
     if (! scalar keys %list) {
-        if (!$how || $how eq 'compile') { $list{'*'} = [qr{(?=)}x] }
+        if (!$how || $how eq 'compile') { $list{'*'} = [qr{.}x] }
         else { die "Missing list of methods to load at $file line $line\n" }
     }
     $how ||= 'autorequire';
