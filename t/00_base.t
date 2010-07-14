@@ -2,9 +2,7 @@
 
 =head1 NAME
 
-03_autorole.t - Test functionality of autorole.
-
-$Id$
+00_base.t - Test functionality of autorole.
 
 =cut
 
@@ -40,7 +38,7 @@ $use = "use AutoRole Foo => '*'";
 ok(eval "package A2; $use; 1", "A2 Loaded - $use") || diag "$@";
 ok(defined(&A2::foo) && defined(&A2::bar) && defined(&A2::baz), "A2 Loaded correct subs");
 
-$use = "use AutoRole Foo => qr{(?=)}";
+$use = "use AutoRole Foo => qr{.}";
 ok(eval "package A3; $use; 1", "A3 Loaded - $use") || diag "$@";
 ok(defined(&A3::foo) && defined(&A3::bar) && defined(&A3::baz), "A3 Loaded correct subs");
 
@@ -56,7 +54,7 @@ $use = "use AutoRole Foo => {'*' => 1}";
 ok(eval "package A6; $use; 1", "A6 Loaded - $use") || diag "$@";
 ok(defined(&A6::foo) && defined(&A6::bar) && defined(&A6::baz), "A6 Loaded correct subs");
 
-$use = "use AutoRole Foo => {'*' => qr{(?=)}}";
+$use = "use AutoRole Foo => {'*' => qr{.}}";
 ok(eval "package A7; $use; 1", "A7 Loaded - $use") || diag "$@";
 ok(defined(&A7::foo) && defined(&A7::bar) && defined(&A7::baz), "A7 Loaded correct subs");
 
