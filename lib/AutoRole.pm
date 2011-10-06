@@ -11,7 +11,7 @@ $Id$
 use strict;
 use warnings;
 
-$AutoRole::VERSION = '0.03';
+$AutoRole::VERSION = '0.04';
 
 sub import {
     my ($class, @args) = @_;
@@ -91,7 +91,7 @@ sub import {
             }
 
             if ($how eq 'compile') {
-                *{"${pkg}::$dest"} = *{"${module}::$src"};
+                *{"${pkg}::$dest"} = *{"${module}::$src"}{'CODE'};
             } elsif ($how eq 'autoload') {
                 ${"${pkg}::AUTOROLE"}->{$dest} = $src;
             } else {
